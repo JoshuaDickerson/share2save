@@ -30,6 +30,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 public class AddBookmark extends Activity {
 	private TextView textView;
 	@Override
@@ -55,7 +57,6 @@ public class AddBookmark extends Activity {
 	}
 	
 	public void performAddBookmark(View view){
-		
 		String[] stringArray = new String[3];
 		EditText bookmark = (EditText) findViewById(R.id.edit_bookmark);
 		EditText title = (EditText) findViewById(R.id.edit_title);
@@ -130,13 +131,6 @@ public class AddBookmark extends Activity {
 		    reader.read(buffer);
 		    return new String(buffer);
 		}
-
-//		@Override
-//		protected String doInBackground(String[]... params) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-
 		
 	}
 
