@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res" >
+            <file
+                name="backrepeat"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/drawable/backrepeat.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/drawable-hdpi/ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/drawable-ldpi/ic_launcher.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="debut_dark"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/drawable-mdpi/debut_dark.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/drawable-mdpi/ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="activity_add_bookmark"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/activity_add_bookmark.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_add_image"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/activity_add_image.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_display_message"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/activity_display_message.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_download_page"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/activity_download_page.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_main"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/activity_main.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="listview_header_row"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/listview_header_row.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="listview_item_row"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/listview_item_row.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_add_bookmark"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/menu/activity_add_bookmark.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="activity_add_image"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/menu/activity_add_image.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="activity_display_message"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/menu/activity_display_message.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="activity_download_page"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/menu/activity_download_page.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                name="activity_main"
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/menu/activity_main.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/values/strings.xml"
+                qualifiers="" >
+                <string name="test_download" >Testing 123
+                </string>
+                <string name="title_activity_display_message" >MyMessage
+                </string>
+                <string name="button_add_bookmark" >Add Bookmark
+                </string>
+                <string name="edit_message" ></string>
+                <string name="title_activity_add_bookmark" >AddBookmark
+                </string>
+                <string name="title_activity_add_image" >AddImage
+                </string>
+                <string name="title_activity_download_page" >DownloadPage
+                </string>
+                <string name="bookmark_tags_hint" >Bookmark Tags
+                </string>
+                <string name="button_search" >Search
+                </string>
+                <string name="bookmark_title_hint" >Bookmark Title
+                </string>
+                <string name="bookmark_hint" >Bookmark Hint
+                </string>
+                <string name="app_name" >share2save
+                </string>
+                <string name="add_image_test" >AddImageTest
+                </string>
+                <string name="hello_world" >Hello world!
+                </string>
+                <string name="menu_settings" >Settings
+                </string>
+            </file>
+            <file
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/values/styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Light" >
+
+                    <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+                    -->
+                </style>
+
+                <style
+                    name="AppTheme"
+                    parent="AppBaseTheme" >
+
+                    <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+                </style>
+            </file>
+            <file
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/values-v11/styles.xml"
+                qualifiers="v11" >
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Holo.Light" >
+
+                    <!-- API 11 theme customizations can go here. -->
+                </style>
+            </file>
+            <file
+                path="/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/values-v14/styles.xml"
+                qualifiers="v14" >
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Holo.Light.DarkActionBar" >
+
+                    <!-- API 14 theme customizations can go here. -->
+                </style>
+            </file>
+        </source>
+        <source path="/Users/josh/AndroidStudioProjects/share2save/app/build/res/rs/debug" />
+        <source path="/Users/josh/AndroidStudioProjects/share2save/app/build/res/generated/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/josh/AndroidStudioProjects/share2save/app/src/debug/res" />
+    </dataSet>
+
+</merger>

@@ -1,0 +1,35 @@
+<!-- From: file:/Users/josh/AndroidStudioProjects/share2save/app/src/main/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.example.share2save">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16"/>
+
+    <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme">
+        <activity android:label="@string/app_name" android:name="com.example.share2save.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <!-- for the share button -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="*/*"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/title_activity_display_message" android:name="com.example.share2save.DisplayMessageActivity" android:parentActivityName="com.example.share2save.MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.example.share2save.MainActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_download_page" android:name="com.example.share2save.DownloadPage">
+        </activity>
+        <activity android:label="@string/title_activity_add_bookmark" android:name="com.example.share2save.AddBookmark">
+        </activity>
+        <activity android:label="@string/title_activity_add_image" android:name="com.example.share2save.AddImage">
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">share2save</string>
+    <string name="edit_message"></string>
+    <string name="button_search">Search</string>
+    <string name="menu_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="test_download">Testing 123</string>
+    <string name="title_activity_display_message">MyMessage</string>
+    <string name="title_activity_download_page">DownloadPage</string>
+    <string name="title_activity_add_bookmark">AddBookmark</string>
+    <string name="button_add_bookmark">Add Bookmark</string>
+    <string name="bookmark_hint">Bookmark Hint</string>
+    <string name="bookmark_title_hint">Bookmark Title</string>
+    <string name="bookmark_tags_hint">Bookmark Tags</string>
+    <string name="title_activity_add_image">AddImage</string>
+    <string name="add_image_test">AddImageTest</string>
+
+</resources>

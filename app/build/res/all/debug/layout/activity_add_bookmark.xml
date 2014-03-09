@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddBookmark" 
+    android:orientation="horizontal">
+
+   <EditText android:id="@+id/edit_bookmark"
+	    android:layout_width="fill_parent"
+	    android:layout_height="60dp" 
+	    android:textSize="12sp"
+	    android:inputType="textNoSuggestions" 
+	    android:hint="@string/bookmark_hint" />
+   
+   <EditText android:id="@+id/edit_title"
+       	android:layout_below="@id/edit_bookmark"
+	    android:layout_width="fill_parent"
+	    android:layout_height="60dp" 
+	    android:textSize="12sp"
+	    android:inputType="textNoSuggestions" 
+	    android:hint="@string/bookmark_title_hint" />
+   
+   <EditText android:id="@+id/edit_tags"
+       	android:layout_below="@id/edit_title"
+	    android:layout_width="fill_parent"
+	    android:layout_height="60dp" 
+	    android:textSize="12sp"
+	    android:inputType="textNoSuggestions" 
+	    android:hint="@string/bookmark_tags_hint" />
+	
+	<!--  sdfasdf onClick event = performSearch -->
+	<Button
+	    android:layout_width="200dp"
+	    android:layout_height="60dp"
+	    android:layout_centerHorizontal="true"
+	    android:layout_below="@id/edit_tags"
+	    android:onClick="performAddBookmark"
+	    android:text="@string/button_add_bookmark" />
+
+</RelativeLayout><!-- From: file:/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/activity_add_bookmark.xml -->

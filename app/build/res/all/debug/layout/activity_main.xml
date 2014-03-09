@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" 
+    android:orientation="horizontal"
+    android:background="@drawable/backrepeat">
+
+	<EditText android:id="@+id/edit_message"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0.8"
+	    android:background="#eee"
+	    android:hint="@string/edit_message"/>
+	
+	<!--  sdfasdf onClick event = performSearch -->
+	<Button
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0.1"
+	    android:onClick="performSearch"
+	    android:text="@string/button_search" />
+	
+</LinearLayout><!-- From: file:/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/activity_main.xml -->
