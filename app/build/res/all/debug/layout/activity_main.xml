@@ -21,17 +21,19 @@
             android:layout_gravity="top">
 
             <Button
-                android:layout_width="119dp"
+                android:layout_width="101dp"
                 android:layout_height="wrap_content"
                 android:text="@string/button_search"
                 android:id="@+id/button"
                 android:onClick="performSearch"
-                android:layout_gravity="left|center_vertical" />
+                android:layout_gravity="left|center_vertical"
+                android:background="#a0c6ff" />
 
             <EditText
                 android:layout_width="250dp"
-                android:layout_height="37dp"
+                android:layout_height="49dp"
                 android:id="@+id/edit_message"
+                android:padding="3dip"
                 android:layout_gravity="right|center_vertical"
                 android:background="#fff" />
         </FrameLayout>
@@ -48,8 +50,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Show All"
+                android:onClick="showAll"
                 android:id="@+id/button2"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center"
+                android:gravity="center" />
         </LinearLayout>
     </GridLayout>
 </LinearLayout><!-- From: file:/Users/josh/AndroidStudioProjects/share2save/app/src/main/res/layout/activity_main.xml -->

@@ -8,12 +8,16 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
 
 public class MainActivity extends Activity {
-	public final static String EXTRA_MESSAGE = "com.example.myfistapp.MESSAGE";
+    Logger log = LoggerFactory.getLogger(MainActivity.class);
+
+    public final static String EXTRA_MESSAGE = "com.example.myfistapp.MESSAGE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,8 +33,7 @@ public class MainActivity extends Activity {
 	             handleSendImage(intent); // Handle single image being sent
 	         }
 	     }else {
-	         // Handle other intents, such as being started from the home screen
-//	    	 handleSendText(intent);
+
 	     }
 	    
 	}
@@ -43,11 +46,6 @@ public class MainActivity extends Activity {
 	}
 	
 	public void performSearch(View view){
-//		String message;
-		//try and get a network connection 
-		
-		// create an intent to do an activity
-//		Intent intent = new Intent(this, DisplayMessageActivity.class);
 		Intent intent = new Intent(this, DownloadPage.class);
 		// get our EditText obj by ID 
 		EditText editText = (EditText) findViewById(R.id.edit_message);
@@ -58,6 +56,14 @@ public class MainActivity extends Activity {
 		// start the intent
 		startActivity(intent);
 	}
+
+    public void showAll(View view){
+        Intent intent = new Intent(this, DownloadPage.class);
+        String nullVal = null;
+        intent.putExtra(EXTRA_MESSAGE,  nullVal);
+        // start the intent
+        startActivity(intent);
+    }
 	
 	public void handleSendText(Intent intent){
 		String message = "nothing";
@@ -66,7 +72,6 @@ public class MainActivity extends Activity {
 	    if (sharedText != null) {
 	    	Intent newIntent = new Intent(this, AddBookmark.class);
 	    	newIntent.putExtra(EXTRA_MESSAGE, sharedText);
-//	    	message = sharedText;
 	    	startActivity(newIntent);
 	    }
 		

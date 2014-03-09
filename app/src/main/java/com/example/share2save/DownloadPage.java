@@ -18,6 +18,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,37 +39,33 @@ import android.widget.TextView;
 public class DownloadPage extends Activity {
 	private TextView textView;
 	private ListView listView1;
-//	public TextView textView = new TextView(this);
+    Logger log = LoggerFactory.getLogger(DownloadPage.class);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_page);
 		Intent intent = getIntent();
 		String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-		
-	ConnectivityManager connMgr = (ConnectivityManager) 
+	    ConnectivityManager connMgr = (ConnectivityManager)
 		getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
 			LinkItem[] items = null;
 			try {
-				items = new BackgroundTask().execute(message).get();
+                if(message != null) {
+                    items = new BackgroundTask().execute(message).get();
+                }else{
+                    items = new BackgroundTask().execute("").get();
+                }
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
 			}
-//			LinkItem items[] = new LinkItem[]{
-//					new LinkItem("Url 1"),
-//					new LinkItem("Url 2"),
-//					new LinkItem("Url 3")
-//			};
 			LinkAdapter adapter = new LinkAdapter(this, R.layout.listview_item_row, items);
 			listView1 = (ListView)findViewById(R.id.listView1);
 			View header = (View)getLayoutInflater().inflate(R.layout.listview_header_row, null);
-//			listView1.addHeaderView(header);
 			listView1.setAdapter(adapter);
 			listView1.setClickable(true);
 			listView1.setOnItemClickListener(new OnItemClickListener(){
@@ -125,7 +123,7 @@ public class DownloadPage extends Activity {
 		
 		public String postData(String search){
 			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost httppost = new HttpPost("http://www.slimdowndesign.com/chrome_extensions/sharetosave/search.php");
+			HttpPost httppost = new HttpPost("http://dev.xenonapps.com/chrome_extensions/sharetosave/search.php");
 			String contentAsString = "";
 			try{
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -136,24 +134,19 @@ public class DownloadPage extends Activity {
 				HttpResponse response = httpclient.execute(httppost);
 				HttpEntity entity = response.getEntity();
 				InputStream is = entity.getContent();
-				contentAsString = readIt(is, 500);
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				
+                // this will restrict how much json we can get at a time
+				contentAsString = readIt(is, 10000);
+			} catch (Exception e) {
+				log.error("Exception thrown trying to post a search term", e);
 			}
 			 
 		     return contentAsString;
 		}
 		
 		// Reads an InputStream and converts it to a String.
-		public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
+		public String readIt(InputStream stream, int len) throws IOException {
 		    Reader reader = null;
-		    reader = new InputStreamReader(stream, "UTF-8");        
+		    reader = new InputStreamReader(stream, "UTF-8");
 		    char[] buffer = new char[len];
 		    reader.read(buffer);
 		    return new String(buffer);
