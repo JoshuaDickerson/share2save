@@ -1,5 +1,7 @@
 package com.example.share2save.model;
 
+import android.content.Intent;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Set;
@@ -10,8 +12,9 @@ import static com.google.common.collect.Sets.newHashSet;
  * Created by josh on 3/9/14.
  */
 public class Bookmark {
-    public URL url;
-    public String title;
+    private Integer id;
+    private URL url;
+    private String title;
     private Set<String> tags = newHashSet();
 
     public Bookmark(){}
@@ -22,6 +25,10 @@ public class Bookmark {
         if(tags != null && !tags.isEmpty()) {
             this.tags.addAll(tags);
         }
+    }
+
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public void setUrl(URL url){

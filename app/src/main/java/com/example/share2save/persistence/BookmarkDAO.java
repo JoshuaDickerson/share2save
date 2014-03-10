@@ -1,18 +1,28 @@
 package com.example.share2save.persistence;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.share2save.model.Bookmark;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.MalformedURLException;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
+
 /**
  * Created by josh on 3/9/14.
  */
 public class BookmarkDAO extends SQLiteOpenHelper {
     // tutorial: http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/
-    
+    Logger log = LoggerFactory.getLogger(BookmarkDAO.class);
+
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "sharetosave";
 
@@ -36,13 +46,16 @@ public class BookmarkDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_BOOKMARK = "CREATE TABLE " + TABLE_BOOKMARKS + "(" + BOOKMARKS_ID + " INTEGER PRIMARY KEY,"
-                + BOOKMARKS_URL + " TEXT," + BOOKMARKS_TITLE + " TEXT)";
+        String CREATE_BOOKMARK = "CREATE TABLE " + TABLE_BOOKMARKS +
+                "(" + BOOKMARKS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                BOOKMARKS_URL + " TEXT," +
+                BOOKMARKS_TITLE + " TEXT" +
+                ");";
 
         db.execSQL(CREATE_BOOKMARK);
 
         String CREATE_TAG = "CREATE TABLE "+TABLE_TAGS+" (" +
-                TAGS_ID + " INTEGER PRIMARY KEY, " +
+                TAGS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TAGS_TAG + " TEXT, " +
                 TAGS_BOOKMARKS_ID + " INTEGER," +
                 "FOREIGN KEY("+TAGS_BOOKMARKS_ID+") REFERENCES " + TABLE_BOOKMARKS + "(" + BOOKMARKS_ID + ")" +
@@ -58,7 +71,26 @@ public class BookmarkDAO extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public Bookmark getBookmarkByTag(String tag){
-        return new Bookmark();
+    public List<Bookmark> getAllBookmarks(){
+        String select = "SELECT * FROM " + TABLE_BOOKMARKS + ";";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(select, null);
+
+        List<Bookmark> results = newArrayList();
+
+        if (cursor.moveToFirst()) {
+            do {
+                try{
+                    Bookmark bookmark = new Bookmark();
+                    bookmark.setId(cursor.getInt(0));
+                    bookmark.setUrl(cursor.getString(1));
+                    bookmark.setTitle(cursor.getString(2));
+                    results.add(bookmark);
+                }catch (MalformedURLException e){
+                    log.error(String.format("Unable to create url instance from string: %s", cursor.getString(1)), e);
+                }
+            } while (cursor.moveToNext());
+        }
+
     }
 }
