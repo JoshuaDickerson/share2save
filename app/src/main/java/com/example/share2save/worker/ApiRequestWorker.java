@@ -5,16 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.share2save.LinkAdapter;
+import com.example.share2save.LinkItem;
 import com.example.share2save.MainActivity;
 import com.example.share2save.R;
 import com.example.share2save.model.Bookmark;
 import com.example.share2save.model.BookmarkResponseObject;
 import com.example.share2save.model.Constants;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,9 +57,12 @@ public class ApiRequestWorker extends Activity {
     private Logger log = LoggerFactory.getLogger(ApiRequestWorker.class);
     private final String USER_AGENT = "Mozilla/5.0";
     private Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    private TextView textView;
+    private ListView listView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        List<Bookmark> bookmarks = newArrayList();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_page);
         Intent intent = getIntent();
@@ -63,7 +74,7 @@ public class ApiRequestWorker extends Activity {
                 case 0:
                     try {
                         URI uri = new URI(Constants.HOST + "/bookmark?userId=1&token=2");
-                        new RequestTask().execute(uri);
+                        bookmarks = new RequestTask().execute(uri).get();
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -71,6 +82,32 @@ public class ApiRequestWorker extends Activity {
                     }
                     break;
             }
+
+            LinkItem[] items = new LinkItem[bookmarks.size()];
+            for(int ii=0; ii< bookmarks.size(); ii++){
+                LinkItem item = new LinkItem();
+                item.title = bookmarks.get(ii).getTitle();
+                item.url = bookmarks.get(ii).getUrl();
+                items[ii] = item;
+
+            }
+
+            LinkAdapter adapter = new LinkAdapter(this, R.layout.listview_item_row, items);
+            listView1 = (ListView)findViewById(R.id.listView1);
+            View header = (View)getLayoutInflater().inflate(R.layout.listview_header_row, null);
+            listView1.setAdapter(adapter);
+            listView1.setClickable(true);
+            listView1.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1,
+                                        int position, long arg3) {
+                    LinkItem li = (LinkItem) listView1.getItemAtPosition(position);
+                    Uri uri = Uri.parse(li.title);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
@@ -82,7 +119,7 @@ public class ApiRequestWorker extends Activity {
     }
 
 
-    public class RequestTask extends AsyncTask<URI, Integer, Long> {
+    public class RequestTask extends AsyncTask<URI, Integer, List<Bookmark>> {
 
         public List<Bookmark> getBookmarks(List<String> tags) throws Exception {
 
@@ -109,12 +146,13 @@ public class ApiRequestWorker extends Activity {
         }
 
         @Override
-        protected Long doInBackground(URI... params) {
+        protected List<Bookmark> doInBackground(URI... params) {
             try {
-                getBookmarks(new ArrayList<String>());
+                return getBookmarks(new ArrayList<String>());
             } catch (Exception e) {
                 log.error("async task threw exception", e);
             }
+
             return null;
         }
     }

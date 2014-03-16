@@ -8,6 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.share2save.model.Bookmark;
+
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
+
 public class LinkAdapter extends ArrayAdapter<LinkItem>{
 	LinkItem linkItems[] = null;
 	int layoutResourceId;
