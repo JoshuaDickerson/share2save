@@ -103,7 +103,7 @@ public class ApiRequestWorker extends Activity {
                 public void onItemClick(AdapterView<?> arg0, View arg1,
                                         int position, long arg3) {
                     LinkItem li = (LinkItem) listView1.getItemAtPosition(position);
-                    Uri uri = Uri.parse(li.title);
+                    Uri uri = Uri.parse(li.url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 }
