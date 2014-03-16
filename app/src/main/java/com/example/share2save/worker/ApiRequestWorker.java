@@ -8,7 +8,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,13 +21,11 @@ import com.example.share2save.R;
 import com.example.share2save.model.Bookmark;
 import com.example.share2save.model.BookmarkResponseObject;
 import com.example.share2save.model.Constants;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import com.example.share2save.persistence.BookmarkDAO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -36,14 +33,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +69,7 @@ public class ApiRequestWorker extends Activity {
                     try {
                         URI uri = new URI(Constants.HOST + "/bookmark?userId=1&token=2");
                         bookmarks = new RequestTask().execute(uri).get();
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -89,7 +84,6 @@ public class ApiRequestWorker extends Activity {
                 item.title = bookmarks.get(ii).getTitle();
                 item.url = bookmarks.get(ii).getUrl();
                 items[ii] = item;
-
             }
 
             LinkAdapter adapter = new LinkAdapter(this, R.layout.listview_item_row, items);
@@ -108,6 +102,9 @@ public class ApiRequestWorker extends Activity {
                     startActivity(intent);
                 }
             });
+
+            BookmarkDAO dao = new BookmarkDAO(this);
+            dao.insertBookmarks(bookmarks);
         }
     }
 

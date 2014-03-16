@@ -1,5 +1,6 @@
 package com.example.share2save.persistence;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
@@ -11,7 +12,6 @@ import com.example.share2save.model.Bookmark;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.MalformedURLException;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -36,6 +36,9 @@ public class BookmarkDAO extends SQLiteOpenHelper {
     private static final String TAGS_TAG = "tag";
     private static final String TAGS_BOOKMARKS_ID = "fkBookmarkId";
 
+    public BookmarkDAO(Context context){
+        super(context, DATABASE_NAME, null, 1);
+    }
     public BookmarkDAO(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -54,11 +57,11 @@ public class BookmarkDAO extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_BOOKMARK);
 
-        String CREATE_TAG = "CREATE TABLE "+TABLE_TAGS+" (" +
+        String CREATE_TAG = "CREATE TABLE " + TABLE_TAGS + " (" +
                 TAGS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TAGS_TAG + " TEXT, " +
                 TAGS_BOOKMARKS_ID + " INTEGER," +
-                "FOREIGN KEY("+TAGS_BOOKMARKS_ID+") REFERENCES " + TABLE_BOOKMARKS + "(" + BOOKMARKS_ID + ")" +
+                "FOREIGN KEY(" + TAGS_BOOKMARKS_ID + ") REFERENCES " + TABLE_BOOKMARKS + "(" + BOOKMARKS_ID + ")" +
                 ");";
 
         db.execSQL(CREATE_TAG);
@@ -71,7 +74,7 @@ public class BookmarkDAO extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public List<Bookmark> getAllBookmarks(){
+    public List<Bookmark> getAllBookmarks() {
         String select = "SELECT * FROM " + TABLE_BOOKMARKS + ";";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(select, null);
@@ -80,15 +83,27 @@ public class BookmarkDAO extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                    Bookmark bookmark = new Bookmark();
-                    bookmark.setId(cursor.getLong(0));
-                    bookmark.setUrl(cursor.getString(1));
-                    bookmark.setTitle(cursor.getString(2));
-                    results.add(bookmark);
+                Bookmark bookmark = new Bookmark();
+                bookmark.setId(cursor.getLong(0));
+                bookmark.setUrl(cursor.getString(1));
+                bookmark.setTitle(cursor.getString(2));
+                results.add(bookmark);
             } while (cursor.moveToNext());
         }
 
         return results;
 
+    }
+
+
+    public void insertBookmarks(List<Bookmark> bookmarks) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        for(Bookmark bookmark : bookmarks){
+            values.put(BOOKMARKS_URL, bookmark.getUrl());
+            values.put(BOOKMARKS_TITLE, bookmark.getTitle());
+        }
+
+        db.insert(TABLE_BOOKMARKS, null, values);
     }
 }
