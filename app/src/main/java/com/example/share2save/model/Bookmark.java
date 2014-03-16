@@ -1,37 +1,14 @@
 package com.example.share2save.model;
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 import java.util.Set;
 
 public class Bookmark implements Serializable{
     private Long id;
-    Set<Tag> tags;
-    User user;
-    String url;
-    String title;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    @Expose private String url;
+    @Expose private String title;
+    @Expose private Set<String> tags;
 
     public String getUrl() {
         return url;
@@ -41,8 +18,23 @@ public class Bookmark implements Serializable{
         this.url = url;
     }
 
-    public void setTitle(String title){
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
     }
 
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
+    public void setId(Long id){
+        this.id = id;
+    }
 }

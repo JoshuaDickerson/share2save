@@ -1,5 +1,7 @@
 package com.example.share2save.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -7,11 +9,9 @@ import java.sql.Date;
  * Created by josh on 12/22/13.
  */
 public class Url implements Serializable{
-
-    private String url;
-    private String title;
-
-    private Long id;
+    @Expose private Long id;
+    @Expose private String url;
+    @Expose private String title;
 
     public void setId(Long id) {
         this.id = id;
@@ -36,16 +36,5 @@ public class Url implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
-//
-//    public Date getDateCreated() {
-//        return dateCreated;
-//    }
-//
-//    public void setDateCreated(Date dateCreated) {
-//        this.dateCreated = dateCreated;
-//    }
-
-
-
 
 }

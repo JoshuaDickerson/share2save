@@ -13,8 +13,11 @@ import android.view.Menu;
 import com.example.share2save.MainActivity;
 import com.example.share2save.R;
 import com.example.share2save.model.Bookmark;
+import com.example.share2save.model.BookmarkResponseObject;
 import com.example.share2save.model.Constants;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
@@ -45,6 +48,7 @@ public class ApiRequestWorker extends Activity {
     public static final int GET_BOOKMARKS = 0;
     private Logger log = LoggerFactory.getLogger(ApiRequestWorker.class);
     private final String USER_AGENT = "Mozilla/5.0";
+    private Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +93,9 @@ public class ApiRequestWorker extends Activity {
 
             HttpEntity entity = response.getEntity();
             InputStream is = entity.getContent();
-            String contentAsString = readIt(is, 10000);
+            String contentAsString = readIt(is, 10000).trim();
             log.info(contentAsString);
-
-            return newArrayList();
+            return BookmarkMapper.mapResponseToBookmarkList(gson.fromJson(contentAsString, BookmarkResponseObject.class));
 
         }
 
