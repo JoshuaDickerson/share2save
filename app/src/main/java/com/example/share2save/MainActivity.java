@@ -8,16 +8,23 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.share2save.model.Tag;
+import com.example.share2save.worker.ApiRequestWorker;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 
+import static com.google.common.collect.Lists.newArrayList;
 
 
 public class MainActivity extends Activity {
-    Logger log = LoggerFactory.getLogger(MainActivity.class);
-
+    private Logger log = LoggerFactory.getLogger(MainActivity.class);
+    private ApiRequestWorker requestWorker = new ApiRequestWorker();
     public final static String EXTRA_MESSAGE = "com.example.myfistapp.MESSAGE";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,12 +64,15 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
-    public void showAll(View view){
-        Intent intent = new Intent(this, DownloadPage.class);
-        String nullVal = null;
-        intent.putExtra(EXTRA_MESSAGE,  nullVal);
-        // start the intent
+    public void showAll(View view) throws Exception {
+        Intent intent = new Intent(this, ApiRequestWorker.class);
+//        String nullVal = null;
+        intent.putExtra(EXTRA_MESSAGE,  ApiRequestWorker.GET_BOOKMARKS);
+//        // start the intent
         startActivity(intent);
+
+//        requestWorker.getBookmarks(new ArrayList<String>());
+//        )
     }
 	
 	public void handleSendText(Intent intent){

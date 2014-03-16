@@ -30,6 +30,7 @@
         </activity>
         <activity android:label="@string/title_activity_add_image" android:name="com.example.share2save.AddImage">
         </activity>
+        <activity android:label="ShowAll" android:name="com.example.share2save.worker.ApiRequestWorker"/>
     </application>
 
 </manifest>
