@@ -22,6 +22,7 @@ import com.example.share2save.model.Bookmark;
 import com.example.share2save.model.BookmarkResponseObject;
 import com.example.share2save.model.Constants;
 import com.example.share2save.persistence.BookmarkDAO;
+import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,8 +41,10 @@ import java.io.Reader;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 /**
  * Created by josh on 3/15/14.
@@ -57,7 +60,11 @@ public class ApiRequestWorker extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         List<Bookmark> bookmarks = newArrayList();
+        Set<Bookmark> bookmarkSet = newHashSet();
+        Set<Bookmark> storedBookmarks = newHashSet();
+
         super.onCreate(savedInstanceState);
+        BookmarkDAO dao = new BookmarkDAO(this);
         setContentView(R.layout.activity_download_page);
         Intent intent = getIntent();
         Integer requestToUse = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, 0);
@@ -69,6 +76,13 @@ public class ApiRequestWorker extends Activity {
                     try {
                         URI uri = new URI(Constants.HOST + "/bookmark?userId=1&token=2");
                         bookmarks = new RequestTask().execute(uri).get();
+                        bookmarkSet.addAll(bookmarks);
+                        storedBookmarks.addAll(dao.getAllBookmarks());
+                        log.info("stored bookmarks size: " + storedBookmarks.size());
+
+                        List<Bookmark> newBookmarks = newArrayList(Sets.difference(bookmarkSet, storedBookmarks).immutableCopy());
+
+                        dao.insertBookmarks(newBookmarks);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -102,9 +116,6 @@ public class ApiRequestWorker extends Activity {
                     startActivity(intent);
                 }
             });
-
-            BookmarkDAO dao = new BookmarkDAO(this);
-            dao.insertBookmarks(bookmarks);
         }
     }
 
