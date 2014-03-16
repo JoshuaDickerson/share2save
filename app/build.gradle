@@ -21,4 +21,6 @@ dependencies {
     compile 'com.android.support:support-v4:+'
     compile 'org.slf4j:slf4j-simple:1.6.1'
     compile group: 'com.google.guava', name: 'guava', version: '12.0'
+    compile 'com.google.code.gson:gson:1.7.2'
+
 }

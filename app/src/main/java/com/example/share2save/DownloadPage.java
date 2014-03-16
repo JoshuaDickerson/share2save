@@ -129,7 +129,9 @@ public class DownloadPage extends Activity {
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 				nameValuePairs.add(new BasicNameValuePair("searchValue", search));
 				nameValuePairs.add(new BasicNameValuePair("userEmail", "joshuajdickerson@gmail.com"));
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                UrlEncodedFormEntity urlEntity = new UrlEncodedFormEntity(nameValuePairs);
+                log.debug(urlEntity.toString());
+				httppost.setEntity(urlEntity);
 				
 				HttpResponse response = httpclient.execute(httppost);
 				HttpEntity entity = response.getEntity();

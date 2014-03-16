@@ -80,17 +80,15 @@ public class BookmarkDAO extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                try{
                     Bookmark bookmark = new Bookmark();
-                    bookmark.setId(cursor.getInt(0));
+                    bookmark.setId(cursor.getLong(0));
                     bookmark.setUrl(cursor.getString(1));
                     bookmark.setTitle(cursor.getString(2));
                     results.add(bookmark);
-                }catch (MalformedURLException e){
-                    log.error(String.format("Unable to create url instance from string: %s", cursor.getString(1)), e);
-                }
             } while (cursor.moveToNext());
         }
+
+        return results;
 
     }
 }
