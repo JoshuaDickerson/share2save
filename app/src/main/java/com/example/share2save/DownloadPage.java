@@ -36,6 +36,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.share2save.model.Constants;
+
 public class DownloadPage extends Activity {
 	private TextView textView;
 	private ListView listView1;
@@ -115,15 +117,10 @@ public class DownloadPage extends Activity {
 			
 			return items;
 		}
-//		@Override
-		protected void onPostExecute(String result){
-//			textView.setText(Html.fromHtml(result));
-//			textView.setMovementMethod(LinkMovementMethod.getInstance());
-		}
 		
 		public String postData(String search){
 			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost httppost = new HttpPost("http://dev.xenonapps.com/chrome_extensions/sharetosave/search.php");
+			HttpPost httppost = new HttpPost(Constants.HOST);
 			String contentAsString = "";
 			try{
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);

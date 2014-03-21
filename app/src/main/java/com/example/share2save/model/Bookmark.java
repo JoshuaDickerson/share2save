@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Set;
 
-public class Bookmark implements Serializable{
+public class Bookmark{
     private Long id;
     @Expose private String url;
     @Expose private String title;
@@ -38,10 +38,11 @@ public class Bookmark implements Serializable{
         this.id = id;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
 
         Bookmark bookmark = (Bookmark) o;
 

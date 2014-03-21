@@ -5,7 +5,8 @@ package com.example.share2save.model;
  */
 public class Constants {
 
-    public static final String HOST = "http://192.168.1.117:8080";
+    public static final String HOST = "http://192.168.1.132:8080/bookmark";
+//    public static final String HOST = "http://dev.xenonapps.com"/chrome_extensions/sharetosave/search.php"
 
     public static enum JSON_TYPE {
         ARRAY, OBJECT, INVALID, PRIMITIVE, NULL;
